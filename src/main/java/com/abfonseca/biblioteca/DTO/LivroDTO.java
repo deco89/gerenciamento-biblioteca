@@ -16,6 +16,9 @@ public class LivroDTO {
         BeanUtils.copyProperties(livro, this);
     }
 
+    public LivroDTO(){
+    }
+
     public Long getId() {
         return id;
     }

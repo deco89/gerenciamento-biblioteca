@@ -2,12 +2,17 @@ package com.abfonseca.biblioteca.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.abfonseca.biblioteca.DTO.LivroDTO;
 import com.abfonseca.biblioteca.entity.LivroEntity;
 import com.abfonseca.biblioteca.repository.LivroRepository;
 
+@Service
 public class LivroService {
 
+    @Autowired
     private LivroRepository livroRepository;
 
     public List<LivroDTO> listarTodosLivros() {
