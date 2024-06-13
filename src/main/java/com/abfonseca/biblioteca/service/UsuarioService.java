@@ -17,8 +17,9 @@ public class UsuarioService {
 
     public List<UsuarioDTO> listarTodos() {
         List<UsuarioEntity> usuarios = usuarioRepository.findAll();
-        return usuarios.stream().map(usuario -> new UsuarioDTO()).toList();
+        return usuarios.stream().map(UsuarioDTO::new).toList();
     }
+    //usuario -> new UsuarioDTO(usuario)
 
     public void inserir(UsuarioDTO usuario) {
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);

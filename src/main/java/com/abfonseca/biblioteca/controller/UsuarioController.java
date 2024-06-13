@@ -30,7 +30,7 @@ public class UsuarioController {
 
     @PostMapping
     public void inserir(@RequestBody UsuarioDTO usuario) {
-        usuarioService.inserir(usuario);;
+        usuarioService.inserir(usuario);
     }
 
     @PutMapping
