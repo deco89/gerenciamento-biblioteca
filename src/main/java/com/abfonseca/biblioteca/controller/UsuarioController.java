@@ -29,7 +29,11 @@ public class UsuarioController {
     public List<UsuarioDTO> listarTodos() {
         return usuarioService.listarTodos();
     }
-
+    
+    @GetMapping("/{id}")
+    public UsuarioDTO buscarUsuarioPorId(Long id) {
+        return usuarioService.buscarPorId(id);
+    }
     @PostMapping
     public void inserir(@RequestBody UsuarioDTO usuario) {
         usuarioService.inserir(usuario);
