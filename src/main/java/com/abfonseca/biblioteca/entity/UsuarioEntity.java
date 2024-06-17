@@ -1,5 +1,7 @@
 package com.abfonseca.biblioteca.entity;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 
 import com.abfonseca.biblioteca.DTO.UsuarioDTO;
@@ -9,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,13 +30,15 @@ public class UsuarioEntity {
     @Column(nullable = false, unique = false)
     private String email;
 
+    @OneToMany(mappedBy = "usuarioEntity")
+    private List<LivroEntity> livros;
+    
+    public UsuarioEntity() {       
+    }
+
     //Faz a conversão de um Entity para DTO
     public UsuarioEntity(UsuarioDTO usuario) {
         BeanUtils.copyProperties(usuario, this);
-    }
-
-    public UsuarioEntity() {
-        
     }
 
     public Long getId() {
@@ -65,6 +70,14 @@ public class UsuarioEntity {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<LivroEntity> getLivros() {
+        return livros;
+    }
+
+    public void setLivros(List<LivroEntity> livros) {
+        this.livros = livros;
     }
 
     @Override

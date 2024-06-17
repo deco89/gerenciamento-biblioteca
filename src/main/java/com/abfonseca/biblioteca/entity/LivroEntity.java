@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,6 +28,10 @@ public class LivroEntity {
     private String descricao;
     @Column(nullable = false)
     private String editora;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private UsuarioEntity usuarioEntity;
 
     public LivroEntity() {        
     }
@@ -63,6 +69,14 @@ public class LivroEntity {
     }
     public void setEditora(String editora) {
         this.editora = editora;
+    }
+
+    public UsuarioEntity getUsuario() {
+        return usuarioEntity;
+    }
+
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuarioEntity = usuario;
     }
 
     

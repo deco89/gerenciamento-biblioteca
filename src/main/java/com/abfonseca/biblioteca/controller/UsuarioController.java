@@ -31,8 +31,8 @@ public class UsuarioController {
     }
     
     @GetMapping("/{id}")
-    public UsuarioDTO buscarUsuarioPorId(Long id) {
-        return usuarioService.buscarPorId(id);
+    public UsuarioDTO buscarUsuarioPorId(UsuarioDTO usuario) {
+        return usuarioService.buscarPorId(usuario.getId());
     }
     @PostMapping
     public void inserir(@RequestBody UsuarioDTO usuario) {

@@ -30,7 +30,7 @@ public class LivroController {
 
     @PostMapping
     public void inserirLivro(@RequestBody LivroDTO livro) {
-        livroService.alterarLivro(livro);
+        livroService.inserirLivro(livro);
     }
 
     @PutMapping
@@ -44,4 +44,8 @@ public class LivroController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/{id}")
+    public LivroDTO buscarLivroPorId(LivroDTO livro) {
+        return livroService.buscarLivroPorId(livro.getId());
+    }
 }

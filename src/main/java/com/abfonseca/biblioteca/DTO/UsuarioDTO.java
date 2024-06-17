@@ -1,5 +1,8 @@
 package com.abfonseca.biblioteca.DTO;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.BeanUtils;
 
 import com.abfonseca.biblioteca.entity.UsuarioEntity;
@@ -8,13 +11,15 @@ public class UsuarioDTO {
 
     private Long id;
     private String nome;
-    private String login;
+    private String login;   
     private String senha;
     private String email;
+    private List<LivroDTO> livros;
 
     //Faz a conversão de um usuarioDTO para uma entidade.
     public UsuarioDTO(UsuarioEntity usuario) {
         BeanUtils.copyProperties(usuario, this);
+        this.livros = usuario.getLivros().stream().map(LivroDTO::new).collect(Collectors.toList());
     }
 
     public UsuarioDTO() {        
@@ -49,5 +54,12 @@ public class UsuarioDTO {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+    public List<LivroDTO> getLivros() {
+        return livros;
+    }
+
+    public void setLivros(List<LivroDTO> livros) {
+        this.livros = livros;
     }
 }
