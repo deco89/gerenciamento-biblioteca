@@ -2,7 +2,6 @@ package com.abfonseca.biblioteca.entity;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,10 +27,8 @@ public class AluguelEntity {
     @JoinColumn(name = "livro_id", nullable = false)
     private LivroEntity livroEntity;
 
-    @Column(nullable = false)
     private LocalDateTime dataAluguel;
     
-    @Column(nullable = false)
     private LocalDateTime dataDevolucao;
 
     public AluguelEntity() {

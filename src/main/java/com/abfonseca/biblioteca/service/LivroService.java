@@ -14,35 +14,29 @@ public class LivroService {
 
     @Autowired
     private LivroRepository livroRepository;
-
-    @Autowired
-    // private UsuarioRepository usuarioRepository;
-
+    
     public List<LivroDTO> listarTodosLivros() {
         List<LivroEntity> livro = livroRepository.findAll();
         return livro.stream().map(LivroDTO::new).toList();
     }
+    
+    public LivroDTO buscarLivroPorId(Long id) {
+        return new LivroDTO(livroRepository.findById(id).orElseThrow(() -> new RuntimeException("Livreo não encontrado")));
+    }
 
     public void inserirLivro(LivroDTO livro) {
         LivroEntity livroEntity = new LivroEntity(livro);
-        // UsuarioEntity usuarioEntity = usuarioRepository.findById(livro.getUsuario_id()).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-        // livroEntity.setUsuario(usuarioEntity);
         livroRepository.save(livroEntity);
     }
 
     public LivroDTO alterarLivro(LivroDTO livro) {
         LivroEntity livroEntity = new LivroEntity(livro);
-        // UsuarioEntity usuarioEntity = usuarioRepository.findById(livro.getUsuario_id()).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
-        // livroEntity.setUsuario(usuarioEntity);
         return new LivroDTO(livroRepository.save(livroEntity));
     }
 
     public void deletarLivro(Long id) {
-        LivroEntity livroEntity = livroRepository.findById(id).get();
+        LivroEntity livroEntity = livroRepository.findById(id).orElseThrow(() -> new RuntimeException("Livreo não encontrado"));
         livroRepository.delete(livroEntity);
     }
 
-    public LivroDTO buscarLivroPorId(Long id) {
-        return new LivroDTO(livroRepository.findById(id).get());
-    }
 }
