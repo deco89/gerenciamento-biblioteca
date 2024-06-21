@@ -1,16 +1,18 @@
 package com.abfonseca.biblioteca.entity;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 
 import com.abfonseca.biblioteca.DTO.LivroDTO;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -29,11 +31,18 @@ public class LivroEntity {
     @Column(nullable = false)
     private String editora;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private UsuarioEntity usuarioEntity;
+    @OneToMany(mappedBy = "livroEntity")
+    private List<AluguelEntity> alugueis;
+    
+        public LivroEntity() {        
+        }
 
-    public LivroEntity() {        
+    public LivroEntity(Long id, String titulo, String autor, String descricao, String editora) {
+        this.id = id;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.descricao = descricao;
+        this.editora = editora;
     }
 
     public LivroEntity(LivroDTO livro) {
@@ -70,15 +79,4 @@ public class LivroEntity {
     public void setEditora(String editora) {
         this.editora = editora;
     }
-
-    public UsuarioEntity getUsuario() {
-        return usuarioEntity;
-    }
-
-    public void setUsuario(UsuarioEntity usuario) {
-        this.usuarioEntity = usuario;
-    }
-
-    
-
 }

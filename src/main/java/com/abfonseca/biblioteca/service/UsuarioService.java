@@ -32,12 +32,12 @@ public class UsuarioService {
     }
 
     public void deletar(Long id) {
-        UsuarioEntity usuario = usuarioRepository.findById(id).get();
+        UsuarioEntity usuario = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não encontrado."));
         usuarioRepository.delete(usuario);
     }
 
     public UsuarioDTO buscarPorId(Long id) {
-        return new UsuarioDTO(usuarioRepository.findById(id).get());        
+        return new UsuarioDTO(usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não encontrado.")));        
     }
 
 }

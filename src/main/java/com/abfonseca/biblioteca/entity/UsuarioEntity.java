@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 
 import com.abfonseca.biblioteca.DTO.UsuarioDTO;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,13 +28,20 @@ public class UsuarioEntity {
     private String login;
     @Column(nullable = false)
     private String senha;
-    @Column(nullable = false, unique = false)
+    @Column(nullable = false, unique = true)
     private String email;
-
     @OneToMany(mappedBy = "usuarioEntity")
-    private List<LivroEntity> livros;
+    private List<AluguelEntity> alugueis;
     
     public UsuarioEntity() {       
+    }
+
+    public UsuarioEntity(Long id, String nome, String login, String senha, String email) {
+        this.id = id;
+        this.nome = nome;
+        this.login = login;
+        this.senha = senha;
+        this.email = email;
     }
 
     //Faz a conversão de um Entity para DTO
@@ -72,35 +80,11 @@ public class UsuarioEntity {
         this.email = email;
     }
 
-    public List<LivroEntity> getLivros() {
-        return livros;
+    public List<AluguelEntity> getAlugueis() {
+        return alugueis;
     }
 
-    public void setLivros(List<LivroEntity> livros) {
-        this.livros = livros;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        UsuarioEntity other = (UsuarioEntity) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
+    public void setAlugueis(List<AluguelEntity> alugueis) {
+        this.alugueis = alugueis;
     }
 }

@@ -14,12 +14,12 @@ public class UsuarioDTO {
     private String login;   
     private String senha;
     private String email;
-    private List<LivroDTO> livros;
+    private List<AluguelDTO> alugueis;
 
     //Faz a conversão de um usuarioDTO para uma entidade.
     public UsuarioDTO(UsuarioEntity usuario) {
         BeanUtils.copyProperties(usuario, this);
-        this.livros = usuario.getLivros().stream().map(LivroDTO::new).collect(Collectors.toList());
+        this.alugueis = usuario.getAlugueis().stream().map(AluguelDTO::new).collect(Collectors.toList());
     }
 
     public UsuarioDTO() {        
@@ -55,11 +55,12 @@ public class UsuarioDTO {
     public void setEmail(String email) {
         this.email = email;
     }
-    public List<LivroDTO> getLivros() {
-        return livros;
+
+    public List<AluguelDTO> getAlugueis() {
+        return alugueis;
     }
 
-    public void setLivros(List<LivroDTO> livros) {
-        this.livros = livros;
+    public void setAlugueis(List<AluguelDTO> alugueis) {
+        this.alugueis = alugueis;
     }
 }

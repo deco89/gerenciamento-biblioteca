@@ -11,16 +11,9 @@ public class LivroDTO {
     private String autor;
     private String descricao;
     private String editora;
-    private Long usuario_id;
 
     public LivroDTO(LivroEntity livro) {
         BeanUtils.copyProperties(livro, this);
-        this.id = livro.getId();
-        this.titulo = livro.getTitulo();
-        this.autor = livro.getAutor();
-        this.descricao = livro.getDescricao();
-        this.editora = livro.getEditora();
-        this.usuario_id = livro.getUsuario().getId();
     }
 
     public LivroDTO(){
@@ -56,12 +49,4 @@ public class LivroDTO {
     public void setEditora(String editora) {
         this.editora = editora;
     }
-    public Long getUsuario_id() {
-        return usuario_id;
-    }
-
-    public void setUsuario_id(Long usuario_id) {
-        this.usuario_id = usuario_id;
-    }
-
 }
