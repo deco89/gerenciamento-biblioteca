@@ -30,7 +30,7 @@ public class UsuarioEntity {
     private String senha;
     @Column(nullable = false, unique = true)
     private String email;
-    @OneToMany(mappedBy = "usuarioEntity")
+    @OneToMany(mappedBy = "usuarioEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AluguelEntity> alugueis;
     
     public UsuarioEntity() {       
