@@ -5,10 +5,13 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 
 import com.abfonseca.biblioteca.DTO.LivroDTO;
+import com.abfonseca.biblioteca.enums.LivroStatus;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,19 +33,22 @@ public class LivroEntity {
     private String descricao;
     @Column(nullable = false)
     private String editora;
+    @Enumerated(EnumType.STRING)
+    private LivroStatus livroStatus;
 
-    @OneToMany(mappedBy = "livroEntity")
+    @OneToMany(mappedBy = "livroEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AluguelEntity> alugueis;
     
-        public LivroEntity() {        
-        }
+    public LivroEntity() {        
+    }
 
-    public LivroEntity(Long id, String titulo, String autor, String descricao, String editora) {
+    public LivroEntity(Long id, String titulo, String autor, String descricao, String editora, LivroStatus livroStatus) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;
         this.descricao = descricao;
         this.editora = editora;
+        this.livroStatus = livroStatus;
     }
 
     public LivroEntity(LivroDTO livro) {
@@ -79,4 +85,11 @@ public class LivroEntity {
     public void setEditora(String editora) {
         this.editora = editora;
     }
+    public LivroStatus getLivroStatus() {
+        return livroStatus;
+    }
+    public void setLivroStatus(LivroStatus livroStatus) {
+        this.livroStatus = livroStatus;
+    }
+
 }

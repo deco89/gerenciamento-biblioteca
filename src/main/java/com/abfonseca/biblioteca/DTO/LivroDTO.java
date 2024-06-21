@@ -3,6 +3,7 @@ package com.abfonseca.biblioteca.DTO;
 import org.springframework.beans.BeanUtils;
 
 import com.abfonseca.biblioteca.entity.LivroEntity;
+import com.abfonseca.biblioteca.enums.LivroStatus;
 
 public class LivroDTO {
 
@@ -11,6 +12,7 @@ public class LivroDTO {
     private String autor;
     private String descricao;
     private String editora;
+    private LivroStatus livroStatus;
 
     public LivroDTO(LivroEntity livro) {
         BeanUtils.copyProperties(livro, this);
@@ -48,5 +50,12 @@ public class LivroDTO {
     }
     public void setEditora(String editora) {
         this.editora = editora;
+    }
+    public LivroStatus getLivroStatus() {
+        return livroStatus;
+    }
+
+    public void setLivroStatus(LivroStatus livroStatus) {
+        this.livroStatus = livroStatus;
     }
 }
