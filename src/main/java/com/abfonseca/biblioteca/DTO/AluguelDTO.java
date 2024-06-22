@@ -57,5 +57,5 @@ public class AluguelDTO {
 
     public void setDataDevolucao(LocalDateTime dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
-    }
+    }    
 }

@@ -54,8 +54,9 @@ public class AluguelService {
 
         AluguelEntity aluguelEntity = aluguelRepository.findById(aluguelId).orElseThrow(() -> new RuntimeException("Aluguel não encontrado"));
         LivroEntity livroEntity = aluguelEntity.getLivroEntity();
+        
         aluguelEntity.setDataDevolucao(LocalDateTime.now().plusWeeks(2));
-
+        
         livroEntity.setLivroStatus(LivroStatus.DISPONIVEL);
 
         livroRepository.save(livroEntity);

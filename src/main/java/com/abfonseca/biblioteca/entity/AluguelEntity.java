@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 @Entity
@@ -42,7 +41,6 @@ public class AluguelEntity {
         this.dataAluguel = dataAluguel;
         this.dataDevolucao = dataDevolucao;
     }
-    
     public Long getId() {
         return id;
     }
@@ -73,15 +71,4 @@ public class AluguelEntity {
     public void setDataDevolucao(LocalDateTime dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
-    
-    @PrePersist
-    public void prePersist() {
-        if (dataAluguel == null) {
-            dataAluguel = LocalDateTime.now();
-        }
-        if (dataDevolucao == null) {
-            dataDevolucao = dataAluguel.plusDays(14); // Exemplo: 2 semanas de aluguel
-        }
-    }
-
 }
