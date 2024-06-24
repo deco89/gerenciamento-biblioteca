@@ -2,6 +2,8 @@ package com.abfonseca.biblioteca.entity;
 
 import java.time.LocalDateTime;
 
+import com.abfonseca.biblioteca.enums.AluguelStatus;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,16 +32,19 @@ public class AluguelEntity {
     
     private LocalDateTime dataDevolucao;
 
+    private AluguelStatus aluguelStatus;
+
     public AluguelEntity() {
     }
     
     public AluguelEntity(Long id, UsuarioEntity usuarioEntity, LivroEntity livroEntity, LocalDateTime dataAluguel,
-            LocalDateTime dataDevolucao) {
+            LocalDateTime dataDevolucao, AluguelStatus aluguelStatus) {
         this.id = id;
         this.usuarioEntity = usuarioEntity;
         this.livroEntity = livroEntity;
         this.dataAluguel = dataAluguel;
         this.dataDevolucao = dataDevolucao;
+        this.aluguelStatus = aluguelStatus;
     }
     public Long getId() {
         return id;
@@ -71,4 +76,13 @@ public class AluguelEntity {
     public void setDataDevolucao(LocalDateTime dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
+
+    public AluguelStatus getAluguelStatus() {
+        return aluguelStatus;
+    }
+
+    public void setAluguelStatus(AluguelStatus aluguelStatus) {
+        this.aluguelStatus = aluguelStatus;
+    }
+    
 }

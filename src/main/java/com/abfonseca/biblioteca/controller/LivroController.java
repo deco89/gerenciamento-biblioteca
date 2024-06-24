@@ -45,7 +45,7 @@ public class LivroController {
     }
 
     @GetMapping("/{id}")
-    public LivroDTO buscarLivroPorId(LivroDTO livro) {
-        return livroService.buscarLivroPorId(livro.getId());
+    public LivroDTO buscarLivroPorId(@PathVariable Long id) {
+        return livroService.buscarLivroPorId(id);
     }
 }

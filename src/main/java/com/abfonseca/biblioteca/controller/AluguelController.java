@@ -27,6 +27,12 @@ public class AluguelController {
         return aluguelService.listarTodosAlugueis();
     }
 
+    @GetMapping("/{id}")
+    public AluguelDTO buscarAluguelPorId(@PathVariable Long id) {
+        return aluguelService.buscarAluguelPorId(id);
+    }
+    
+
     @PostMapping("/alugar")
     public ResponseEntity<Void> alugarLivro(@RequestParam Long usuarioId, Long livroId) {
         aluguelService.alugarLivro(usuarioId, livroId);

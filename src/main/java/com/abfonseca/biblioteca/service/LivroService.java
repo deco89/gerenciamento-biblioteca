@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.abfonseca.biblioteca.DTO.LivroDTO;
 import com.abfonseca.biblioteca.entity.LivroEntity;
+import com.abfonseca.biblioteca.enums.LivroStatus;
 import com.abfonseca.biblioteca.repository.LivroRepository;
 
 @Service
@@ -26,6 +27,7 @@ public class LivroService {
 
     public void inserirLivro(LivroDTO livro) {
         LivroEntity livroEntity = new LivroEntity(livro);
+        livroEntity.setLivroStatus(LivroStatus.DISPONIVEL);
         livroRepository.save(livroEntity);
     }
 

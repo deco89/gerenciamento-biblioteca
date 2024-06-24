@@ -91,5 +91,4 @@ public class LivroEntity {
     public void setLivroStatus(LivroStatus livroStatus) {
         this.livroStatus = livroStatus;
     }
-
 }

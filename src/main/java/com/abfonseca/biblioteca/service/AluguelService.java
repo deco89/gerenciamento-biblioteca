@@ -10,6 +10,7 @@ import com.abfonseca.biblioteca.DTO.AluguelDTO;
 import com.abfonseca.biblioteca.entity.AluguelEntity;
 import com.abfonseca.biblioteca.entity.LivroEntity;
 import com.abfonseca.biblioteca.entity.UsuarioEntity;
+import com.abfonseca.biblioteca.enums.AluguelStatus;
 import com.abfonseca.biblioteca.enums.LivroStatus;
 import com.abfonseca.biblioteca.repository.AluguelRepository;
 import com.abfonseca.biblioteca.repository.LivroRepository;
@@ -32,6 +33,10 @@ public class AluguelService {
         return alugueis.stream().map(AluguelDTO::new).toList();
     }
 
+    public AluguelDTO buscarAluguelPorId(Long id) {
+        return new AluguelDTO(aluguelRepository.findById(id).orElseThrow(() -> new RuntimeException("Aluguel não encontrado")));
+    }
+
     public void alugarLivro(Long usuarioId, Long livroId) {
         UsuarioEntity usuarioEntity = usuarioepository.findById(usuarioId).orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
         LivroEntity livroEntity = livroRepository.findById(livroId).orElseThrow(() -> new RuntimeException("Livro não encontrado"));
@@ -43,23 +48,28 @@ public class AluguelService {
             aluguelEntity.setUsuarioEntity(usuarioEntity);
             aluguelEntity.setLivroEntity(livroEntity);
             aluguelEntity.setDataAluguel(LocalDateTime.now());
-            // aluguelEntity.setDataDevolucao(LocalDateTime.now().plusWeeks(2));
 
             livroEntity.setLivroStatus(LivroStatus.ALUGADO);    
+            aluguelEntity.setAluguelStatus(AluguelStatus.ABERTO);
             livroRepository.save(livroEntity);
             aluguelRepository.save(aluguelEntity);
+
     }
 
-    public void devolverLivro(Long aluguelId) {
-
-        AluguelEntity aluguelEntity = aluguelRepository.findById(aluguelId).orElseThrow(() -> new RuntimeException("Aluguel não encontrado"));
-        LivroEntity livroEntity = aluguelEntity.getLivroEntity();
+    public void devolverLivro(Long livroId) {
         
-        aluguelEntity.setDataDevolucao(LocalDateTime.now().plusWeeks(2));
-        
-        livroEntity.setLivroStatus(LivroStatus.DISPONIVEL);
+        LivroEntity livroEntity = livroRepository.findById(livroId).orElseThrow(() -> new RuntimeException("Livro não encontrado!"));        
+        AluguelEntity aluguelEntity = aluguelRepository.findByLivroEntity(livroEntity).orElseThrow(() -> new RuntimeException("Aluguel não encontrado!"));
 
-        livroRepository.save(livroEntity);
-        aluguelRepository.save(aluguelEntity);
+        if(aluguelEntity.getAluguelStatus() == AluguelStatus.FINALIZADO) {
+            throw new IllegalStateException("Este livro já foi devolvido");
+        }
+            aluguelEntity.setDataDevolucao(LocalDateTime.now().plusWeeks(3));        
+            
+            livroEntity.setLivroStatus(LivroStatus.DISPONIVEL);
+            aluguelEntity.setAluguelStatus(AluguelStatus.FINALIZADO);
+            livroRepository.save(livroEntity);
+            aluguelRepository.save(aluguelEntity);
+    
     }
 }

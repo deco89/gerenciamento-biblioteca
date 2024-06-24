@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import org.springframework.beans.BeanUtils;
 
 import com.abfonseca.biblioteca.entity.AluguelEntity;
+import com.abfonseca.biblioteca.enums.AluguelStatus;
 
 public class AluguelDTO {
 
@@ -13,6 +14,7 @@ public class AluguelDTO {
     private Long livroId;
     private LocalDateTime dataAluguel;
     private LocalDateTime dataDevolucao;
+    private AluguelStatus aluguelStatus;
 
     public AluguelDTO(AluguelEntity aluguel) {
         BeanUtils.copyProperties(aluguel, this);
@@ -21,6 +23,7 @@ public class AluguelDTO {
         this.livroId = aluguel.getLivroEntity().getId();
         this.dataAluguel = aluguel.getDataAluguel();
         this.dataDevolucao = aluguel.getDataDevolucao();
+        this.aluguelStatus = aluguel.getAluguelStatus();
     }   
 
     public AluguelDTO() {}    
@@ -57,5 +60,14 @@ public class AluguelDTO {
 
     public void setDataDevolucao(LocalDateTime dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
+    }
+
+    public AluguelStatus getAluguelStatus() {
+        return aluguelStatus;
+    }
+
+    public void setAluguelStatus(AluguelStatus aluguelStatus) {
+        this.aluguelStatus = aluguelStatus;
     }    
+    
 }
