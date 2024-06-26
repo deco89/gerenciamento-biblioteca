@@ -3,7 +3,6 @@ package com.abfonseca.biblioteca.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,12 +40,7 @@ public class AluguelController {
 
     @PostMapping("/devolver/{id}")
     public ResponseEntity<Void> devolverLivro(@PathVariable Long id) {
-        try {
-            aluguelService.devolverLivro(id);
-            return ResponseEntity.ok().build();
-
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        aluguelService.devolverLivro(id);
+        return ResponseEntity.ok().build();        
     }
 }

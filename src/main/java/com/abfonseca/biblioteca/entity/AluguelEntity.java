@@ -32,18 +32,21 @@ public class AluguelEntity {
     
     private LocalDateTime dataDevolucao;
 
+    private LocalDateTime prazoDeDevolucao;
+
     private AluguelStatus aluguelStatus;
 
     public AluguelEntity() {
     }
     
     public AluguelEntity(Long id, UsuarioEntity usuarioEntity, LivroEntity livroEntity, LocalDateTime dataAluguel,
-            LocalDateTime dataDevolucao, AluguelStatus aluguelStatus) {
+            LocalDateTime dataDevolucao, LocalDateTime prazoDeDevolucao, AluguelStatus aluguelStatus) {
         this.id = id;
         this.usuarioEntity = usuarioEntity;
         this.livroEntity = livroEntity;
         this.dataAluguel = dataAluguel;
         this.dataDevolucao = dataDevolucao;
+        this.prazoDeDevolucao = prazoDeDevolucao;
         this.aluguelStatus = aluguelStatus;
     }
     public Long getId() {
@@ -84,5 +87,12 @@ public class AluguelEntity {
     public void setAluguelStatus(AluguelStatus aluguelStatus) {
         this.aluguelStatus = aluguelStatus;
     }
-    
+
+    public LocalDateTime getPrazoDeDevolucao() {
+        return prazoDeDevolucao;
+    }
+
+    public void setPrazoDeDevolucao(LocalDateTime prazoDeDevolucao) {
+        this.prazoDeDevolucao = prazoDeDevolucao;
+    }    
 }

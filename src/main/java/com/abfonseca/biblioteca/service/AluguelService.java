@@ -36,7 +36,7 @@ public class AluguelService {
     public AluguelDTO buscarAluguelPorId(Long id) {
         return new AluguelDTO(aluguelRepository.findById(id).orElseThrow(() -> new RuntimeException("Aluguel não encontrado")));
     }
-
+    
     public void alugarLivro(Long usuarioId, Long livroId) {
         UsuarioEntity usuarioEntity = usuarioepository.findById(usuarioId).orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
         LivroEntity livroEntity = livroRepository.findById(livroId).orElseThrow(() -> new RuntimeException("Livro não encontrado"));
@@ -48,6 +48,7 @@ public class AluguelService {
             aluguelEntity.setUsuarioEntity(usuarioEntity);
             aluguelEntity.setLivroEntity(livroEntity);
             aluguelEntity.setDataAluguel(LocalDateTime.now());
+            aluguelEntity.setPrazoDeDevolucao(LocalDateTime.now().plusWeeks(1));
 
             livroEntity.setLivroStatus(LivroStatus.ALUGADO);    
             aluguelEntity.setAluguelStatus(AluguelStatus.ABERTO);
@@ -64,12 +65,23 @@ public class AluguelService {
         if(aluguelEntity.getAluguelStatus() == AluguelStatus.FINALIZADO) {
             throw new IllegalStateException("Este livro já foi devolvido");
         }
-            aluguelEntity.setDataDevolucao(LocalDateTime.now().plusWeeks(3));        
+            aluguelEntity.setDataDevolucao(LocalDateTime.now().plusWeeks(3));            
             
             livroEntity.setLivroStatus(LivroStatus.DISPONIVEL);
             aluguelEntity.setAluguelStatus(AluguelStatus.FINALIZADO);
             livroRepository.save(livroEntity);
-            aluguelRepository.save(aluguelEntity);
-    
+            aluguelRepository.save(aluguelEntity);               
     }
+
+    // public void multaDeAtraso() {
+
+    //     List<AluguelEntity> alugueis = aluguelRepository.findAll();
+    //     alugueis.forEach(aluguel -> {
+    //         if(aluguel.getAluguelStatus() == AluguelStatus.ABERTO) {
+    //             if(aluguel.getPrazoDeDevolucao() ) {
+
+    //             }
+    //         }
+    //     });
+    // }
 }

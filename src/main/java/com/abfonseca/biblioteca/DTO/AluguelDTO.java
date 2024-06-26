@@ -14,6 +14,7 @@ public class AluguelDTO {
     private Long livroId;
     private LocalDateTime dataAluguel;
     private LocalDateTime dataDevolucao;
+    private LocalDateTime prazoDeDevolucao;
     private AluguelStatus aluguelStatus;
 
     public AluguelDTO(AluguelEntity aluguel) {
@@ -23,6 +24,7 @@ public class AluguelDTO {
         this.livroId = aluguel.getLivroEntity().getId();
         this.dataAluguel = aluguel.getDataAluguel();
         this.dataDevolucao = aluguel.getDataDevolucao();
+        this.prazoDeDevolucao = aluguel.getPrazoDeDevolucao();
         this.aluguelStatus = aluguel.getAluguelStatus();
     }   
 
@@ -68,6 +70,14 @@ public class AluguelDTO {
 
     public void setAluguelStatus(AluguelStatus aluguelStatus) {
         this.aluguelStatus = aluguelStatus;
+    }
+
+    public LocalDateTime getPrazoDeDevolucao() {
+        return prazoDeDevolucao;
+    }
+
+    public void setPrazoDeDevolucao(LocalDateTime prazoDeDevolucao) {
+        this.prazoDeDevolucao = prazoDeDevolucao;
     }    
     
 }
