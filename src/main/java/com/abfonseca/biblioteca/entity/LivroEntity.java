@@ -17,9 +17,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "ab_livro")
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class LivroEntity {
 
     @Id
@@ -38,9 +46,6 @@ public class LivroEntity {
 
     @OneToMany(mappedBy = "livroEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AluguelEntity> alugueis;
-    
-    public LivroEntity() {        
-    }
 
     public LivroEntity(Long id, String titulo, String autor, String descricao, String editora, LivroStatus livroStatus) {
         this.id = id;
@@ -53,42 +58,5 @@ public class LivroEntity {
 
     public LivroEntity(LivroDTO livro) {
         BeanUtils.copyProperties(livro, this);
-    }
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getTitulo() {
-        return titulo;
-    }
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-    public String getAutor() {
-        return autor;
-    }
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-    public String getDescricao() {
-        return descricao;
-    }
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-    public String getEditora() {
-        return editora;
-    }
-    public void setEditora(String editora) {
-        this.editora = editora;
-    }
-    public LivroStatus getLivroStatus() {
-        return livroStatus;
-    }
-    public void setLivroStatus(LivroStatus livroStatus) {
-        this.livroStatus = livroStatus;
     }
 }

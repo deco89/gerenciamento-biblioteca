@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import com.abfonseca.biblioteca.service.LivroService;
 
 @RestController
 @RequestMapping(value = "/livro")
+@CrossOrigin
 public class LivroController {
 
     @Autowired
@@ -26,6 +28,10 @@ public class LivroController {
     @GetMapping
     public List<LivroDTO> listarTodosLivros() {
         return livroService.listarTodosLivros();
+    }
+    @GetMapping("/{id}")
+    public LivroDTO buscarLivroPorId(@PathVariable Long id) {
+        return livroService.buscarLivroPorId(id);
     }
 
     @PostMapping
@@ -44,8 +50,4 @@ public class LivroController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id}")
-    public LivroDTO buscarLivroPorId(@PathVariable Long id) {
-        return livroService.buscarLivroPorId(id);
-    }
 }

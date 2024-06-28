@@ -22,7 +22,7 @@ public class LivroService {
     }
     
     public LivroDTO buscarLivroPorId(Long id) {
-        return new LivroDTO(livroRepository.findById(id).orElseThrow(() -> new RuntimeException("Livreo não encontrado")));
+        return new LivroDTO(livroRepository.findById(id).orElseThrow(() -> new RuntimeException("Livro não encontrado")));
     }
 
     public void inserirLivro(LivroDTO livro) {

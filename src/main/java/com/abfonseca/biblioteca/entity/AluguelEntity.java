@@ -11,9 +11,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "ab_aluguel")
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class AluguelEntity {
 
     @Id
@@ -36,9 +44,6 @@ public class AluguelEntity {
 
     private AluguelStatus aluguelStatus;
 
-    public AluguelEntity() {
-    }
-    
     public AluguelEntity(Long id, UsuarioEntity usuarioEntity, LivroEntity livroEntity, LocalDateTime dataAluguel,
             LocalDateTime dataDevolucao, LocalDateTime prazoDeDevolucao, AluguelStatus aluguelStatus) {
         this.id = id;
@@ -49,50 +54,4 @@ public class AluguelEntity {
         this.prazoDeDevolucao = prazoDeDevolucao;
         this.aluguelStatus = aluguelStatus;
     }
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public UsuarioEntity getUsuarioEntity() {
-        return usuarioEntity;
-    }
-    public void setUsuarioEntity(UsuarioEntity usuarioEntity) {
-        this.usuarioEntity = usuarioEntity;
-    }
-    public LivroEntity getLivroEntity() {
-        return livroEntity;
-    }
-    public void setLivroEntity(LivroEntity livroEntity) {
-        this.livroEntity = livroEntity;
-    }
-    public LocalDateTime getDataAluguel() {
-        return dataAluguel;
-    }
-    public void setDataAluguel(LocalDateTime dataAluguel) {
-        this.dataAluguel = dataAluguel;
-    }
-    public LocalDateTime getDataDevolucao() {
-        return dataDevolucao;
-    }
-    public void setDataDevolucao(LocalDateTime dataDevolucao) {
-        this.dataDevolucao = dataDevolucao;
-    }
-
-    public AluguelStatus getAluguelStatus() {
-        return aluguelStatus;
-    }
-
-    public void setAluguelStatus(AluguelStatus aluguelStatus) {
-        this.aluguelStatus = aluguelStatus;
-    }
-
-    public LocalDateTime getPrazoDeDevolucao() {
-        return prazoDeDevolucao;
-    }
-
-    public void setPrazoDeDevolucao(LocalDateTime prazoDeDevolucao) {
-        this.prazoDeDevolucao = prazoDeDevolucao;
-    }    
 }

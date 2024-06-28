@@ -14,9 +14,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "ab_usuario")
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class UsuarioEntity {
 
     @Id
@@ -32,9 +40,6 @@ public class UsuarioEntity {
     private String email;
     @OneToMany(mappedBy = "usuarioEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AluguelEntity> alugueis;
-    
-    public UsuarioEntity() {       
-    }
 
     public UsuarioEntity(Long id, String nome, String login, String senha, String email) {
         this.id = id;
@@ -47,44 +52,5 @@ public class UsuarioEntity {
     //Faz a conversão de um Entity para DTO
     public UsuarioEntity(UsuarioDTO usuario) {
         BeanUtils.copyProperties(usuario, this);
-    }
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getNome() {
-        return nome;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    public String getLogin() {
-        return login;
-    }
-    public void setLogin(String login) {
-        this.login = login;
-    }
-    public String getSenha() {
-        return senha;
-    }
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public List<AluguelEntity> getAlugueis() {
-        return alugueis;
-    }
-
-    public void setAlugueis(List<AluguelEntity> alugueis) {
-        this.alugueis = alugueis;
     }
 }

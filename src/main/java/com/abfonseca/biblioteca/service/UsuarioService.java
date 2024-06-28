@@ -20,6 +20,9 @@ public class UsuarioService {
         return usuarios.stream().map(UsuarioDTO::new).toList();
     }
     //usuario -> new UsuarioDTO(usuario)
+    public UsuarioDTO buscarPorId(Long id) {
+        return new UsuarioDTO(usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não encontrado.")));        
+    }
 
     public void inserir(UsuarioDTO usuario) {
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
@@ -36,8 +39,5 @@ public class UsuarioService {
         usuarioRepository.delete(usuario);
     }
 
-    public UsuarioDTO buscarPorId(Long id) {
-        return new UsuarioDTO(usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não encontrado.")));        
-    }
 
 }
