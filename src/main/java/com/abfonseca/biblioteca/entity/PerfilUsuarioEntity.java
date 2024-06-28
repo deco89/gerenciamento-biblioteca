@@ -40,8 +40,4 @@ public class PerfilUsuarioEntity {
             this.perfil = new PerfilEntity(perfilUsuario.getPerfil());
         }
     }
-
-
-
-
 }
