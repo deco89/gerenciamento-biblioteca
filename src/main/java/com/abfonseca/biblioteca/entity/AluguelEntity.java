@@ -1,6 +1,6 @@
 package com.abfonseca.biblioteca.entity;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import com.abfonseca.biblioteca.enums.AluguelStatus;
 
@@ -36,16 +36,16 @@ public class AluguelEntity {
     @JoinColumn(name = "livro_id", nullable = false)
     private LivroEntity livroEntity;
 
-    private LocalDateTime dataAluguel;
+    private Instant dataAluguel;
     
-    private LocalDateTime dataDevolucao;
+    private Instant dataDevolucao;
 
-    private LocalDateTime prazoDeDevolucao;
+    private Instant prazoDeDevolucao;
 
     private AluguelStatus aluguelStatus;
 
-    public AluguelEntity(Long id, UsuarioEntity usuarioEntity, LivroEntity livroEntity, LocalDateTime dataAluguel,
-            LocalDateTime dataDevolucao, LocalDateTime prazoDeDevolucao, AluguelStatus aluguelStatus) {
+    public AluguelEntity(Long id, UsuarioEntity usuarioEntity, LivroEntity livroEntity, Instant dataAluguel,
+            Instant dataDevolucao, Instant prazoDeDevolucao, AluguelStatus aluguelStatus) {
         this.id = id;
         this.usuarioEntity = usuarioEntity;
         this.livroEntity = livroEntity;

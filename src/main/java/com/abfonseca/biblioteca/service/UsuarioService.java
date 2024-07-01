@@ -58,7 +58,7 @@ public class UsuarioService {
 
 
         emailService.enviarEmail(usuario.getEmail(), 
-                        "Novo usuario cadastrado",
+                        "Validação de Cadastro",
                         "Você está recebendo um email de cadastro. O número para validação é: " + verificador.getUuid());
     }
     public UsuarioDTO atualizar(UsuarioDTO usuario) {
@@ -70,5 +70,24 @@ public class UsuarioService {
     public void deletar(Long id) {
         UsuarioEntity usuario = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não encontrado."));
         usuarioRepository.delete(usuario);
+    }
+
+    public String checarCadastro(String uuid) {
+        UsuarioVerificadorEntity usuarioVerificador = usuarioVerificadorRepository.findByUuid(UUID.fromString(uuid)).get();
+
+        if(usuarioVerificador != null) { 
+            if (usuarioVerificador.getDataExpiracao().compareTo(Instant.now()) >= 0) {
+                UsuarioEntity usuario = usuarioVerificador.getUsuario();
+                usuario.setSituacao(TipoSituacaoUsuario.ATIVO);
+                usuarioRepository.save(usuario);
+
+                return "Verificação concluida";
+            } else {
+                usuarioVerificadorRepository.delete(usuarioVerificador);
+                return "Tempo expirado. Por favor repita o procedimento";
+            } 
+        }else {
+                return "Usuario não verificado";
+        }
     }
 }

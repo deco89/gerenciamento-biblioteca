@@ -1,6 +1,6 @@
 package com.abfonseca.biblioteca.DTO;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import org.springframework.beans.BeanUtils;
 
@@ -12,9 +12,9 @@ public class AluguelDTO {
     private Long id;
     private Long usuarioId;
     private Long livroId;
-    private LocalDateTime dataAluguel;
-    private LocalDateTime dataDevolucao;
-    private LocalDateTime prazoDeDevolucao;
+    private Instant dataAluguel;
+    private Instant dataDevolucao;
+    private Instant prazoDeDevolucao;
     private AluguelStatus aluguelStatus;
 
     public AluguelDTO(AluguelEntity aluguel) {
@@ -48,19 +48,19 @@ public class AluguelDTO {
     public void setLivroId(Long livroId) {
         this.livroId = livroId;
     }
-    public LocalDateTime getDataAluguel() {
+    public Instant getDataAluguel() {
         return dataAluguel;
     }
 
-    public void setDataAluguel(LocalDateTime dataAluguel) {
+    public void setDataAluguel(Instant dataAluguel) {
         this.dataAluguel = dataAluguel;
     }
 
-    public LocalDateTime getDataDevolucao() {
+    public Instant getDataDevolucao() {
         return dataDevolucao;
     }
 
-    public void setDataDevolucao(LocalDateTime dataDevolucao) {
+    public void setDataDevolucao(Instant dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
 
@@ -72,11 +72,11 @@ public class AluguelDTO {
         this.aluguelStatus = aluguelStatus;
     }
 
-    public LocalDateTime getPrazoDeDevolucao() {
+    public Instant getPrazoDeDevolucao() {
         return prazoDeDevolucao;
     }
 
-    public void setPrazoDeDevolucao(LocalDateTime prazoDeDevolucao) {
+    public void setPrazoDeDevolucao(Instant prazoDeDevolucao) {
         this.prazoDeDevolucao = prazoDeDevolucao;
     }    
     

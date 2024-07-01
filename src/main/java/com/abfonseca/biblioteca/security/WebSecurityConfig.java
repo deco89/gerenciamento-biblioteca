@@ -48,6 +48,8 @@ public class WebSecurityConfig {
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll()
                                         .requestMatchers("/usuario/**").permitAll()
+                                        .requestMatchers("/aluguel/**").permitAll()
+                                        .requestMatchers("/livro/**").permitAll()
                                         .anyRequest().authenticated());
 
         http.addFilterBefore(authFilterToken(), UsernamePasswordAuthenticationFilter.class);

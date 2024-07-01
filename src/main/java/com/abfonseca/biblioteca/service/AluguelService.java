@@ -1,6 +1,6 @@
 package com.abfonseca.biblioteca.service;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +47,8 @@ public class AluguelService {
             AluguelEntity aluguelEntity = new AluguelEntity();
             aluguelEntity.setUsuarioEntity(usuarioEntity);
             aluguelEntity.setLivroEntity(livroEntity);
-            aluguelEntity.setDataAluguel(LocalDateTime.now());
-            aluguelEntity.setPrazoDeDevolucao(LocalDateTime.now().plusWeeks(1));
+            aluguelEntity.setDataAluguel(Instant.now());
+            aluguelEntity.setPrazoDeDevolucao(Instant.now().plusSeconds(129600));
 
             livroEntity.setLivroStatus(LivroStatus.ALUGADO);    
             aluguelEntity.setAluguelStatus(AluguelStatus.ABERTO);
@@ -65,7 +65,7 @@ public class AluguelService {
         if(aluguelEntity.getAluguelStatus() == AluguelStatus.FINALIZADO) {
             throw new IllegalStateException("Este livro já foi devolvido");
         }
-            aluguelEntity.setDataDevolucao(LocalDateTime.now().plusWeeks(3));            
+            aluguelEntity.setDataDevolucao(Instant.now().plusSeconds(1814499));            
             
             livroEntity.setLivroStatus(LivroStatus.DISPONIVEL);
             aluguelEntity.setAluguelStatus(AluguelStatus.FINALIZADO);
@@ -73,15 +73,33 @@ public class AluguelService {
             aluguelRepository.save(aluguelEntity);               
     }
 
-    // public void multaDeAtraso() {
+    // public void multaDeAtraso(Long id) {
 
-    //     List<AluguelEntity> alugueis = aluguelRepository.findAll();
-    //     alugueis.forEach(aluguel -> {
-    //         if(aluguel.getAluguelStatus() == AluguelStatus.ABERTO) {
-    //             if(aluguel.getPrazoDeDevolucao() ) {
+    //     double multa = 0;
+    //     double multaFixa = 3.0;
+    //     double multaVariavel = 1.0;
+    //     int contadorDeDias = 0;
+        
+    //     AluguelEntity aluguelEntity = aluguelRepository.findById(id).orElseThrow(() -> new RuntimeException("Alguel não encontrado"));
+        
+    //     long diasDeAtraso = aluguelEntity.getDataAluguel();
 
+    //     while (aluguelEntity.getDataAluguel().isBefore(Instant.now())) {
+    //         contadorDeDias++;
+    //         aluguelEntity.getDataAluguel().plusSeconds(86400);
+    //     }
+        
+    //     while (aluguelEntity.getAluguelStatus() == AluguelStatus.ABERTO) {
+    //         aluguelEntity.getDataAluguel().
+    //     }
+
+    //     if(aluguelEntity != null) {
+    //         if(aluguelEntity.getAluguelStatus() == AluguelStatus.ABERTO) {
+    //             if(aluguelEntity.getPrazoDeDevolucao().compareTo(Instant.now()) >= 0) {
+    //                 multa += multaFixa;
+    //                 multa += multaVariavel * diasDeAtraso;
     //             }
     //         }
-    //     });
+    //     }
     // }
 }
