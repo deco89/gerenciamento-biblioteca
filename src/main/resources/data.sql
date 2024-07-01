@@ -1,6 +1,6 @@
-INSERT INTO AB_USUARIO (ID, NOME, LOGIN, SENHA, EMAIL) VALUES (1, 'Usuario 1', 'usuario1', '1234', 'usuario1@gmail.com');
+INSERT INTO AB_USUARIO (ID, NOME, LOGIN, SENHA, EMAIL, SITUACAO) VALUES (1, 'Usuario 1', 'usuario1', '1234', 'usuario1@gmail.com', 'ATIVO');
 
-INSERT INTO AB_USUARIO (ID, NOME, LOGIN, SENHA, EMAIL) VALUES (2, 'Usuario 2', 'usuario2', '1234', 'usuario2@gmail.com');
+INSERT INTO AB_USUARIO (ID, NOME, LOGIN, SENHA, EMAIL, SITUACAO) VALUES (2, 'Usuario 2', 'usuario2', '1234', 'usuario2@gmail.com', 'ATIVO');
 
 ALTER SEQUENCE AB_USUARIO_ID_SEQ RESTART WITH 3;
 

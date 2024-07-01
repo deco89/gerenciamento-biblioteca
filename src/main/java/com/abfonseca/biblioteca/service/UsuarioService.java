@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.abfonseca.biblioteca.DTO.UsuarioDTO;
 import com.abfonseca.biblioteca.entity.UsuarioEntity;
+import com.abfonseca.biblioteca.enums.TipoSituacaoUsuario;
 import com.abfonseca.biblioteca.repository.UsuarioRepository;
 
 @Service
@@ -26,14 +27,19 @@ public class UsuarioService {
     //usuario -> new UsuarioDTO(usuario)
     public UsuarioDTO buscarPorId(Long id) {
         return new UsuarioDTO(usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não encontrado.")));        
-    }
-
+    }    
     public void inserir(UsuarioDTO usuario) {
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
+        usuarioEntity.setSenha(passwordEncoder.encode(usuario.getSenha()));        
+        usuarioRepository.save(usuarioEntity);
+    }    
+    public void inserirNovoUsario(UsuarioDTO usuario) {
+        UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
         usuarioEntity.setSenha(passwordEncoder.encode(usuario.getSenha()));
+        usuarioEntity.setSituacao(TipoSituacaoUsuario.PENDENTE);
+        usuarioEntity.setId(null);
         usuarioRepository.save(usuarioEntity);
     }
-
     public UsuarioDTO atualizar(UsuarioDTO usuario) {
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
         usuarioEntity.setSenha(passwordEncoder.encode(usuario.getSenha()));
@@ -44,6 +50,4 @@ public class UsuarioService {
         UsuarioEntity usuario = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não encontrado."));
         usuarioRepository.delete(usuario);
     }
-
-
 }

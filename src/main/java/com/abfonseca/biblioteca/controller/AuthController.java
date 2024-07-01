@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abfonseca.biblioteca.DTO.AuthenticationDTO;
+import com.abfonseca.biblioteca.DTO.UsuarioDTO;
 import com.abfonseca.biblioteca.service.AuthService;
+import com.abfonseca.biblioteca.service.UsuarioService;
 
 @RestController
 @RequestMapping("/auth")
@@ -19,9 +21,18 @@ public class AuthController {
     @Autowired
     private AuthService authService; // Assuming AuthService is already defined and injected via dependency injection.
 
+    @Autowired 
+    private UsuarioService usuarioService;
+
     @PostMapping(value = "/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationDTO authDTO) {
         return ResponseEntity.ok(authService.login(authDTO));
     }
+
+    @PostMapping(value = "/signin")
+    public void inserirNovoUsuario(@RequestBody UsuarioDTO usuario) {
+        usuarioService.inserirNovoUsario(usuario);
+    }
+
 
 }

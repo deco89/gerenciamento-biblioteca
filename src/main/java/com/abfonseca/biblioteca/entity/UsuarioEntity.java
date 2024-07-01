@@ -5,10 +5,13 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 
 import com.abfonseca.biblioteca.DTO.UsuarioDTO;
+import com.abfonseca.biblioteca.enums.TipoSituacaoUsuario;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -38,6 +41,11 @@ public class UsuarioEntity {
     private String senha;
     @Column(nullable = false, unique = true)
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TipoSituacaoUsuario situacao;
+
     @OneToMany(mappedBy = "usuarioEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AluguelEntity> alugueis;
 

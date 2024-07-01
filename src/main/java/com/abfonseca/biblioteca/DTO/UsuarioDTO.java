@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.BeanUtils;
 
 import com.abfonseca.biblioteca.entity.UsuarioEntity;
+import com.abfonseca.biblioteca.enums.TipoSituacaoUsuario;
 
 public class UsuarioDTO {
 
@@ -14,6 +15,7 @@ public class UsuarioDTO {
     private String login;   
     private String senha;
     private String email;
+    private TipoSituacaoUsuario situacao;
     private List<AluguelDTO> alugueis;
 
     //Faz a conversão de um usuarioDTO para uma entidade.
@@ -62,5 +64,13 @@ public class UsuarioDTO {
 
     public void setAlugueis(List<AluguelDTO> alugueis) {
         this.alugueis = alugueis;
+    }
+
+    public TipoSituacaoUsuario getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(TipoSituacaoUsuario situacao) {
+        this.situacao = situacao;
     }
 }
