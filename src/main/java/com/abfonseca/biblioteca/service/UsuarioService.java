@@ -20,6 +20,9 @@ public class UsuarioService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private EmailService emailService;
+
     public List<UsuarioDTO> listarTodos() {
         List<UsuarioEntity> usuarios = usuarioRepository.findAll();
         return usuarios.stream().map(UsuarioDTO::new).toList();
@@ -39,6 +42,10 @@ public class UsuarioService {
         usuarioEntity.setSituacao(TipoSituacaoUsuario.PENDENTE);
         usuarioEntity.setId(null);
         usuarioRepository.save(usuarioEntity);
+
+        emailService.enviarEmail(usuario.getEmail(), 
+                        "Novo usuario cadastrado",
+                        "Confirme sua identidade");
     }
     public UsuarioDTO atualizar(UsuarioDTO usuario) {
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
