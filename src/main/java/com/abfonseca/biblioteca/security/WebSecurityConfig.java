@@ -13,17 +13,32 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.abfonseca.biblioteca.security.jwt.AuthEntryPointJwt;
 import com.abfonseca.biblioteca.security.jwt.AuthFilterToken;
 
 @Configuration
 @EnableMethodSecurity
-public class WebSecurityConfig {
+public class WebSecurityConfig implements WebMvcConfigurer {
 
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
-    
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
+            }
+        };
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -47,9 +62,11 @@ public class WebSecurityConfig {
         .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll()
-                                        .requestMatchers("/usuario/**").permitAll()
+                                        .requestMatchers("/usuarios/**").permitAll()
                                         .requestMatchers("/aluguel/**").permitAll()
                                         .requestMatchers("/livro/**").permitAll()
+                                        .requestMatchers("/perfil/**").permitAll()
+                                        .requestMatchers("/recurso/**").permitAll()
                                         .anyRequest().authenticated());
 
         http.addFilterBefore(authFilterToken(), UsernamePasswordAuthenticationFilter.class);

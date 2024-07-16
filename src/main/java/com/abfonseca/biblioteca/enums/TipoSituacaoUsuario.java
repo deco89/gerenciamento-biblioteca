@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum TipoSituacaoUsuario {
 
-    ATIVO ("A", "ATIVO"),
-    INATIVO ("I", "INATIVO"),
-    PENDENTE ("P", "PENDENTE");
+    ATIVO ("ATIVO", "ATIVO"),
+    INATIVO ("INATIVO", "INATIVO"),
+    PENDENTE ("PENDENTE", "PENDENTE");
 
     private String codigo;
     private String descricao;

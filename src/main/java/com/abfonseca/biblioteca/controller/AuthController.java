@@ -33,7 +33,7 @@ public class AuthController {
 
     @PostMapping(value = "/novoUsuario")
     public void inserirNovoUsuario(@RequestBody UsuarioDTO usuario) {
-        usuarioService.inserirNovoUsario(usuario);
+        usuarioService.inserirNovoUsuario(usuario);
     }
 
     @GetMapping(value = "/checarCadastro/{uuid}")

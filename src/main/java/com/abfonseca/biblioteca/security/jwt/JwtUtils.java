@@ -1,6 +1,5 @@
 package com.abfonseca.biblioteca.security.jwt;
 
-import java.nio.charset.MalformedInputException;
 import java.security.Key;
 import java.util.Date;
 
@@ -14,10 +13,10 @@ import com.abfonseca.biblioteca.service.UserDetailsImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JwtUtils {

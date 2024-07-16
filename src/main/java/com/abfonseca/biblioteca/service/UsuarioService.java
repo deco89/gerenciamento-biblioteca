@@ -38,12 +38,12 @@ public class UsuarioService {
     public UsuarioDTO buscarPorId(Long id) {
         return new UsuarioDTO(usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não encontrado.")));        
     }    
-    public void inserir(UsuarioDTO usuario) {
-        UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
-        usuarioEntity.setSenha(passwordEncoder.encode(usuario.getSenha()));        
-        usuarioRepository.save(usuarioEntity);
-    }    
-    public void inserirNovoUsario(UsuarioDTO usuario) {
+    // public void inserir(UsuarioDTO usuario) {
+    //     UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
+    //     usuarioEntity.setSenha(passwordEncoder.encode(usuario.getSenha()));        
+    //     usuarioRepository.save(usuarioEntity);
+    // }    
+    public void inserirNovoUsuario(UsuarioDTO usuario) {
         UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
         usuarioEntity.setSenha(passwordEncoder.encode(usuario.getSenha()));
         usuarioEntity.setSituacao(TipoSituacaoUsuario.PENDENTE);
@@ -61,9 +61,18 @@ public class UsuarioService {
                         "Validação de Cadastro",
                         "Você está recebendo um email de cadastro. O número para validação é: " + verificador.getUuid());
     }
-    public UsuarioDTO atualizar(UsuarioDTO usuario) {
-        UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
-        usuarioEntity.setSenha(passwordEncoder.encode(usuario.getSenha()));
+
+    public UsuarioDTO atualizar(Long id, UsuarioDTO usuario) {
+        UsuarioEntity usuarioEntity = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuário não econtrado"));
+
+        usuarioEntity.setNome(usuario.getNome());
+        usuarioEntity.setEmail(usuario.getEmail());
+        usuarioEntity.setLogin(usuario.getLogin());
+
+        if (usuario.getSenha() != null && !usuario.getSenha().isEmpty()) {
+            usuarioEntity.setSenha(passwordEncoder.encode(usuario.getSenha()));
+        }
+        
         return new UsuarioDTO(usuarioRepository.save(usuarioEntity));
     }
 

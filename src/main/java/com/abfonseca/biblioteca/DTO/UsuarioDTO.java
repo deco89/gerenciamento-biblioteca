@@ -9,7 +9,7 @@ import com.abfonseca.biblioteca.entity.UsuarioEntity;
 import com.abfonseca.biblioteca.enums.TipoSituacaoUsuario;
 
 public class UsuarioDTO {
-
+    
     private Long id;
     private String nome;
     private String login;   
